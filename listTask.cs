@@ -4,9 +4,19 @@ public class PrintTask
 {
     public static void PrintAllTasks(User user)
     {
-        foreach(var task in user.tasks)
+        if (user.tasks.Count == 0) Console.WriteLine("Looks like you don't have any tasks!");
+        else
         {
-            
+            foreach (var task in user.tasks)
+            {
+                Console.WriteLine("----------------------------");
+                Console.WriteLine("Task: ", task.Title);
+                Console.WriteLine("Task ID: ", task.Id);
+                if (task.Completed) Console.WriteLine("Completed! Good job me!");
+                else Console.WriteLine("Still needs to be done");
+                Console.WriteLine(task.Description);
+
+            }
         }
     }
 }
