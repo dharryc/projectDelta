@@ -14,7 +14,9 @@ public class PrintTask
                 Console.WriteLine("Task ID: ", task.Id);
                 if (task.Completed) Console.WriteLine("Completed! Good job me!");
                 else Console.WriteLine("Still needs to be done");
+                Console.WriteLine("****************************");
                 Console.WriteLine(task.Description);
+                Console.WriteLine("****************************");
 
             }
         }
