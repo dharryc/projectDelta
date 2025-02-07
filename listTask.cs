@@ -13,7 +13,7 @@ public class PrintTask
             {
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("Task: ", task.Title);
-                Console.WriteLine("Task ID: ", task.Id);
+                Console.WriteLine("Task index: ", user.Tasks.IndexOf(task));
                 if (task.Completed) Console.WriteLine("Completed! Good job me!");
                 else Console.WriteLine("Still needs to be done");
                 Console.WriteLine("****************************");
