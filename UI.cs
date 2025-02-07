@@ -9,9 +9,10 @@ Console.WriteLine("Welcome to the HKJL To-Do List.");
 Console.WriteLine();
 
 Console.WriteLine();
-Console.WriteLine("To display your To-Do List and toggle completion, press '0'");
+Console.WriteLine("To display your To-Do List press '0'");
 Console.WriteLine("To add a new task, press '1'");
 Console.WriteLine("To delete tasks, press '2'");
+Console.WriteLine("To toggle task completion, press '3'");
 
 int selection = -1;
 while (selection == -1)
@@ -24,7 +25,7 @@ while (selection == -1)
     {
         Console.WriteLine(selection);
     }
-    if (selection > 2 || selection < 0)
+    if (selection > 3 || selection < 0)
     {
         selection = -1;
     }
@@ -33,7 +34,7 @@ while (selection == -1)
 switch (selection)
 {
     case 0:
-        Console.Clear()
+        Console.Clear();
         PrintTask.PrintAllTasks(currentUser);
         break;
 
@@ -45,4 +46,7 @@ switch (selection)
         // DeleteTask();
         break;
 
+    case 3:
+        toggleTask.select_task_and_toggle(currentUser);
+        break;
 }
