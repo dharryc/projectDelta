@@ -13,7 +13,7 @@ public class PrintTask
             {
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("Task: ", task.Title);
-                Console.WriteLine("Task ID: ", task.Id);
+                Console.WriteLine("Task index: ", user.Tasks.IndexOf(task));
                 if (task.Completed) Console.WriteLine("Completed! Good job me!");
                 else Console.WriteLine("Still needs to be done");
                 Console.WriteLine("****************************");
@@ -25,7 +25,8 @@ public class PrintTask
     }
 }
 
-public class Persistance
+
+public class Persistence
 {
     public static void StoreUsers(List<User> users)
     {

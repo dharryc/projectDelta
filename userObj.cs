@@ -26,6 +26,19 @@ public class User
     {
         Tasks.Add(task);
     }
+
+    /// <summary>
+    /// Deletes the task at specified index
+    /// </summary>
+    public void DeleteTaskByIndex(int index)
+    {
+        if (index >= Tasks.Count)
+        {
+            throw new ArgumentOutOfRangeException("This index is not valid in the User.Tasks list");
+        }
+
+        Tasks.RemoveAt(index);
+    }
 }
 
 public class Task
