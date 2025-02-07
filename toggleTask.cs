@@ -2,6 +2,29 @@
 
 public class toggleTask {
 
+	public static void select_task_and_toggle(User user) {
+		int option;
+
+		do {
+			Console.WriteLine("Which task would you like to toggle?");
+			Console.WriteLine("  0. Cancel");
+
+			int i = 1;
+			foreach (Task task in user.tasks) {
+				Console.WriteLine($"  {i}. {task.title}");
+				i++;
+			}
+			Console.Write("> ");
+
+			if (int.TryParse(Console.ReadLine(), out option)) {
+				if (option == 0) break;
+				else if (option < i) { toggle_task(user.tasks[option - 1]); break; }
+				else Console.WriteLine("Please enter a valid number!");
+			}
+			else Console.WriteLine("Please enter a valid number!");
+		} while (true);
+	}
+
 	public static void toggle_task(Task task) {
 		int option;
 
