@@ -1,7 +1,7 @@
 ﻿//Landon
 
-var currentUser = new User();
-currentUser.tasks = new();
+var currentUser = new User("john doe");
+currentUser.Tasks = new();
 
 
 Console.Clear();
@@ -33,45 +33,16 @@ while (selection == -1)
 switch (selection)
 {
     case 0:
-        DisplayandToggleTasks();
+        Console.Clear()
+        PrintTask.PrintAllTasks(currentUser);
         break;
 
     case 1:
-        AddTask();
+        // AddTask();
         break;
 
     case 2:
-        DeleteTask();
+        // DeleteTask();
         break;
-
-}
-
-void DisplayandToggleTasks()
-{
-    Console.Clear();
-
-    if (currentUser.tasks.Count() == 0)
-    {
-        Console.WriteLine("You have no tasks on your To-Do List.");
-    }
-    else
-    {
-        foreach (Task task in currentUser.tasks)
-        {
-            if (task.completed)
-                Console.WriteLine($"- {task.title}: {task.description}  --  [COMPLETE]");
-            else
-                Console.WriteLine($"- {task.title}: {task.description}  --  [INCOMPLETE]");
-        }
-    }
-}
-
-void AddTask()
-{
-
-}
-
-void DeleteTask()
-{
 
 }
