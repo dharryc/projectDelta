@@ -5,8 +5,13 @@ public class User
 
 public class Task
 {
-    public Guid id;
-    public string title;
-    public string description;
-    public bool completed;
+    public Guid Id;
+    public string Title;
+    public string Description;
+    public bool Completed;
+
+    public Task(string title, string description)
+    {
+
+    }
 }
