@@ -1,5 +1,3 @@
-//Harry
-
 using System.Text.Json;
 
 public class PrintTask
