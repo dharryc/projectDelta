@@ -23,7 +23,6 @@ while (true)
         }
         catch
         {
-            Console.WriteLine(selection);
         }
         if (selection > 3 || selection < 0)
         {
@@ -95,6 +94,43 @@ while (true)
 
     void DeleteTaskUI()
     {
+        bool correctDeletion = false;
+        int deleteSelection = -1;
 
+        while (!correctDeletion)
+        {
+
+            Console.Clear();
+            Console.WriteLine("Please enter the number of the task you wish to delete.");
+            Console.WriteLine();
+
+            int x = 0;
+            foreach (Task task in currentUser.Tasks)
+            {
+                Console.WriteLine($"{x}: {task.Title}");
+                x++;
+            }
+
+            while (deleteSelection == -1)
+            {
+                try
+                {
+                    deleteSelection = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+                }
+                catch { }
+
+                if (deleteSelection < 0 || deleteSelection > currentUser.Tasks.Count)
+                    deleteSelection = -1;
+            }
+
+            Console.WriteLine($"Deleting task {deleteSelection}: {currentUser.Tasks[deleteSelection].Title}, is this correct? (Y/N)");
+
+            string deletionConfirm = Console.ReadKey(true).KeyChar.ToString();
+
+            if (deletionConfirm.ToLower() == "y")
+                correctDeletion = true;
+        }
+
+        currentUser.DeleteTaskByIndex(deleteSelection);
     }
 }
