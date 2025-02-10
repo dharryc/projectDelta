@@ -58,10 +58,10 @@ void DisplayandToggleTasks()
     {
         foreach (Task task in currentUser.tasks)
         {
-            if (task.completed)
-                Console.WriteLine($"- {task.title}: {task.description}  --  [COMPLETE]");
+            if (task.Completed)
+                Console.WriteLine($"- {task.Title}: {task.Description}  --  [COMPLETE]");
             else
-                Console.WriteLine($"- {task.title}: {task.description}  --  [INCOMPLETE]");
+                Console.WriteLine($"- {task.Title}: {task.Description}  --  [INCOMPLETE]");
         }
     }
 }
