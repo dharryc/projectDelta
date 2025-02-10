@@ -39,14 +39,52 @@ switch (selection)
         break;
 
     case 1:
-        // AddTask();
+        AddTaskUI();
         break;
 
     case 2:
-        // DeleteTask();
+        DeleteTaskUI();
         break;
 
     case 3:
         toggleTask.select_task_and_toggle(currentUser);
         break;
+}
+
+
+void AddTaskUI()
+{
+    bool correctTitle = false;
+
+    while (!correctTitle)
+    {
+        Console.Clear();
+        Console.WriteLine("Please enter the title of your new task");
+
+        string taskTitle = console.Readline();
+        Console.WriteLine($"Your new task will be called [{taskTitle}], is this correct? (Y/N)");
+
+        string titleConfirm = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+
+        if (titleConfirm.ToLower() == 'y')
+            correctTitle == true;
+    }
+
+    bool correctDescription = false;
+
+    while (!correctDescription)
+    {
+                Console.Clear();
+        Console.WriteLine($"Please enter the description of {taskTitle}");
+
+        string taskDescription = console.Readline();
+        Console.WriteLine($"The description of {taskTitle} will be [{taskDescription}], is this correct? (Y/N)");
+
+        string descriptionConfirm = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+
+        if (descriptionConfirm.ToLower() == 'y')
+            correctDescription == true;
+    }
+
+    
 }
