@@ -1,5 +1,3 @@
-//Kyler
-
 public class toggleTask {
 
 	public static void select_task_and_toggle(User user) {

@@ -1,7 +1,9 @@
+
 public class User
 {
     public string Name { get; set; }
     public List<Task> Tasks = new();
+    internal IEnumerable<Task> tasks;
 
     public User(string name)
     {
