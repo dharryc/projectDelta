@@ -10,7 +10,7 @@ public class PrintTask
             foreach (var task in user.Tasks)
             {
                 Console.WriteLine("----------------------------");
-                Console.WriteLine("Task: ", task.Title);
+                Console.WriteLine(task.Title);
                 Console.WriteLine("Task index: ", user.Tasks.IndexOf(task));
                 if (task.Completed) Console.WriteLine("[Completed]");
                 else Console.WriteLine("[Incomplete]");
