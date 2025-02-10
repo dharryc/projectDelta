@@ -30,14 +30,16 @@ public class Persistence
 
     public static void StoreUser(User user)
     {
-        if (!File.Exists("./users.json")) File.Create("./users.json");
-        var userJson = JsonSerializer.Serialize(user);
-        File.WriteAllText("./users.json", userJson);
+        string storage = "./users.json";
+        File.WriteAllText(storage, JsonSerializer.Serialize(user));
     }
 
     public static User getUser()
     {
-        if(!File.Exists("./users.json")) return new User();
+        if (!File.Exists("./users.json"))
+        {
+            return new User();
+        }
         else
         {
             var userJson = File.ReadAllText("./users.json");

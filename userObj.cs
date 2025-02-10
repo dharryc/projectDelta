@@ -2,7 +2,7 @@
 public class User
 {
     public string Name { get; set; }
-    public List<Task> Tasks = new();
+    public List<Task> Tasks { get; set; } = [];
 
     /// <summary>
     /// Name defaults to User
@@ -20,15 +20,7 @@ public class User
     /// <param name="description"></param>
     public void AddTask(string title, string description)
     {
-        Tasks.Add(new Task(title, description));
-    }
-
-    /// <summary>
-    /// Pass in the Task object
-    /// </summary>
-    /// <param name="task"></param>
-    public void AddTask(Task task)
-    {
+        Task task = new Task(title, description);
         Tasks.Add(task);
     }
 
