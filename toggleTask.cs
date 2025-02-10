@@ -12,9 +12,8 @@ public class toggleTask {
 				Console.WriteLine($"  {i}. {task.Title}");
 				i++;
 			}
-			Console.Write("> ");
 
-			if (int.TryParse(Console.ReadLine(), out option)) {
+			if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out option)) {
 				if (option == 0) break;
 				else if (option < i) { toggle_task(user.Tasks[option - 1]); break; }
 				else Console.WriteLine("Please enter a valid number!");
@@ -33,8 +32,8 @@ public class toggleTask {
 			Console.WriteLine("  0. Cancel");
 			Console.WriteLine("  1. Complete");
 			Console.WriteLine("  2. Not Complete");
-			Console.Write("> ");
-			if (int.TryParse(Console.ReadLine(), out option)) {
+
+			if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out option)) {
 				if (option == 0) break;
 				else if (option == 1) { task.Completed = true; break; }
 				else if (option == 2) { task.Completed = false; break; }
