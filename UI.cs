@@ -1,5 +1,9 @@
 ﻿//Landon
-var currentUser = new User("User");
+var currentUser = Persistence.getUser();
+if (currentUser == null)
+{
+    currentUser = new User();
+}
 
 
 while (true)
@@ -13,6 +17,7 @@ while (true)
     Console.WriteLine("To add a new task, press '1'");
     Console.WriteLine("To delete tasks, press '2'");
     Console.WriteLine("To toggle task completion, press '3'");
+    Console.WriteLine("To save and exit, press '4'");
 
     int selection = -1;
     while (selection == -1)
@@ -24,7 +29,7 @@ while (true)
         catch
         {
         }
-        if (selection > 3 || selection < 0)
+        if (selection > 4 || selection < 0)
         {
             selection = -1;
         }
@@ -48,6 +53,10 @@ while (true)
 
         case 3:
             toggleTask.select_task_and_toggle(currentUser);
+            break;
+
+        case 4:
+            Persistence.StoreUser(currentUser);
             break;
     }
 
@@ -95,13 +104,13 @@ while (true)
     void DeleteTaskUI()
     {
         bool correctDeletion = false;
-        int deleteSelection = -1;
+        int deleteSelection = -2;
 
         while (!correctDeletion)
         {
 
             Console.Clear();
-            Console.WriteLine("Please enter the number of the task you wish to delete.");
+            Console.WriteLine("Please enter the number of the task you wish to delete. To cancel, enter [-1]");
             Console.WriteLine();
 
             int x = 0;
@@ -111,26 +120,38 @@ while (true)
                 x++;
             }
 
-            while (deleteSelection == -1)
+            while (deleteSelection == -2)
             {
                 try
                 {
-                    deleteSelection = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+                    deleteSelection = int.Parse(Console.ReadLine());
                 }
                 catch { }
 
+                if (deleteSelection == -1)
+                {
+                    break;
+                }
                 if (deleteSelection < 0 || deleteSelection > currentUser.Tasks.Count)
-                    deleteSelection = -1;
+                    deleteSelection = -2;
             }
 
-            Console.WriteLine($"Deleting task {deleteSelection}: {currentUser.Tasks[deleteSelection].Title}, is this correct? (Y/N)");
-
-            string deletionConfirm = Console.ReadKey(true).KeyChar.ToString();
-
-            if (deletionConfirm.ToLower() == "y")
+            if (deleteSelection == -1)
                 correctDeletion = true;
-        }
 
-        currentUser.DeleteTaskByIndex(deleteSelection);
+            if (deleteSelection != -1)
+            {
+
+                Console.WriteLine($"Deleting task {deleteSelection}: {currentUser.Tasks[deleteSelection].Title}, is this correct? (Y/N)");
+
+                string deletionConfirm = Console.ReadKey(true).KeyChar.ToString();
+
+                if (deletionConfirm.ToLower() == "y")
+                    correctDeletion = true;
+
+                currentUser.DeleteTaskByIndex(deleteSelection);
+            }
+
+        }
     }
 }
