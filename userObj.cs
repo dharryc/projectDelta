@@ -3,9 +3,12 @@ public class User
 {
     public string Name { get; set; }
     public List<Task> Tasks = new();
-    internal IEnumerable<Task> tasks;
 
-    public User(string name)
+    /// <summary>
+    /// Name defaults to User
+    /// </summary>
+    /// <param name="name"></param>
+    public User(string name = "User")
     {
         Name = name;
     }

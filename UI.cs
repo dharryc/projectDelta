@@ -1,9 +1,9 @@
 ﻿//Landon
-
-var currentUser = new User("john doe");
-currentUser.Tasks = new();
+var currentUser = new User("User");
 
 
+while(true)
+{
 Console.Clear();
 Console.WriteLine("Welcome to the HKJL To-Do List.");
 Console.WriteLine();
@@ -43,7 +43,7 @@ switch (selection)
         break;
 
     case 2:
-        DeleteTaskUI();
+        // DeleteTaskUI();
         break;
 
     case 3:
@@ -56,35 +56,39 @@ void AddTaskUI()
 {
     bool correctTitle = false;
 
+    string taskTitle = "";
+    string taskDescription = "";
+
     while (!correctTitle)
     {
         Console.Clear();
         Console.WriteLine("Please enter the title of your new task");
 
-        string taskTitle = console.Readline();
+        taskTitle = Console.ReadLine();
         Console.WriteLine($"Your new task will be called [{taskTitle}], is this correct? (Y/N)");
 
-        string titleConfirm = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+        string titleConfirm = Console.ReadKey(true).KeyChar.ToString();
 
-        if (titleConfirm.ToLower() == 'y')
-            correctTitle == true;
+        if (titleConfirm.ToLower() == "y")
+            correctTitle = true;
     }
 
     bool correctDescription = false;
 
     while (!correctDescription)
     {
-                Console.Clear();
+        Console.Clear();
         Console.WriteLine($"Please enter the description of {taskTitle}");
 
-        string taskDescription = console.Readline();
+        taskDescription = Console.ReadLine();
         Console.WriteLine($"The description of {taskTitle} will be [{taskDescription}], is this correct? (Y/N)");
 
-        string descriptionConfirm = int.Parse(Console.ReadKey(true).KeyChar.ToString());
+        string descriptionConfirm = Console.ReadKey(true).KeyChar.ToString();
 
-        if (descriptionConfirm.ToLower() == 'y')
-            correctDescription == true;
+        if (descriptionConfirm.ToLower() == "y")
+            correctDescription = true;
     }
 
-    
+    currentUser.AddTask(taskTitle, taskDescription);
+}
 }
