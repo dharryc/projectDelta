@@ -7,17 +7,18 @@ public class PrintTask
         if (user.Tasks.Count == 0) Console.WriteLine("Looks like you don't have any tasks!");
         else
         {
+            int i = 0;
             foreach (var task in user.Tasks)
             {
                 Console.WriteLine("----------------------------");
                 Console.WriteLine(task.Title);
-                Console.WriteLine("Task index: ", user.Tasks.IndexOf(task));
+                Console.WriteLine("Task index: " + i);
                 if (task.Completed) Console.WriteLine("[Completed]");
                 else Console.WriteLine("[Incomplete]");
                 Console.WriteLine("****************************");
                 Console.WriteLine(task.Description);
                 Console.WriteLine("****************************");
-
+                i++;
             }
         }
     }
@@ -26,12 +27,6 @@ public class PrintTask
 
 public class Persistence
 {
-    public static void StoreUsers(List<User> users)
-    {
-        if (!File.Exists("./users.json")) File.Create("./users.json");
-        var userJson = JsonSerializer.Serialize(users);
-        File.WriteAllText("./users.json", userJson);
-    }
 
     public static void StoreUser(User user)
     {
@@ -40,19 +35,9 @@ public class Persistence
         File.WriteAllText("./users.json", userJson);
     }
 
-    public static List<User> getUsers()
-    {
-        if(!File.Exists("./users.json")) return new List<User>();
-        else
-        {
-            var userJson = File.ReadAllText("./users.json");
-            List<User>? usersList = JsonSerializer.Deserialize<List<User>>(userJson);
-            return usersList;
-        }
-    }
     public static User getUser()
     {
-        if(!File.Exists("./users.json")) return null;
+        if(!File.Exists("./users.json")) return new User();
         else
         {
             var userJson = File.ReadAllText("./users.json");
