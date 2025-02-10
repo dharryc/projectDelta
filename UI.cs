@@ -1,5 +1,9 @@
 ﻿//Landon
-var currentUser = new User("User");
+var currentUser = Persistence.getUser();
+if (currentUser == null)
+{
+    currentUser = new User();
+}
 
 
 while (true)
@@ -13,6 +17,7 @@ while (true)
     Console.WriteLine("To add a new task, press '1'");
     Console.WriteLine("To delete tasks, press '2'");
     Console.WriteLine("To toggle task completion, press '3'");
+    Console.WriteLine("To save and exit, press '4'");
 
     int selection = -1;
     while (selection == -1)
@@ -24,7 +29,7 @@ while (true)
         catch
         {
         }
-        if (selection > 3 || selection < 0)
+        if (selection > 4 || selection < 0)
         {
             selection = -1;
         }
@@ -48,6 +53,10 @@ while (true)
 
         case 3:
             toggleTask.select_task_and_toggle(currentUser);
+            break;
+
+        case 4:
+            Persistence.StoreUser(currentUser);
             break;
     }
 
