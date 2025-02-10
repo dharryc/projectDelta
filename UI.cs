@@ -1,7 +1,6 @@
 ﻿//Landon
 
-var currentUser = new User();
-currentUser.tasks = new();
+var currentUser = new User("User");
 
 
 Console.Clear();
@@ -50,13 +49,13 @@ void DisplayandToggleTasks()
 {
     Console.Clear();
 
-    if (currentUser.tasks.Count() == 0)
+    if (currentUser.Tasks.Count() == 0)
     {
         Console.WriteLine("You have no tasks on your To-Do List.");
     }
     else
     {
-        foreach (Task task in currentUser.tasks)
+        foreach (Task task in currentUser.Tasks)
         {
             if (task.Completed)
                 Console.WriteLine($"- {task.Title}: {task.Description}  --  [COMPLETE]");
