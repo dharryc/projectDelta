@@ -57,7 +57,7 @@ while (true)
 
         case 4:
             Persistence.StoreUser(currentUser);
-            break;
+            return;
     }
 
 
