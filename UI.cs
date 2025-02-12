@@ -52,6 +52,7 @@ while (true)
             break;
 
         case 3:
+            Console.Clear();
             toggleTask.select_task_and_toggle(currentUser);
             break;
 
