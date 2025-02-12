@@ -223,6 +223,7 @@ public class toggleTask
 
         do
         {
+            Console.Clear();
             Console.WriteLine("Which task would you like to toggle?");
             Console.WriteLine("  0. Cancel");
 
@@ -247,6 +248,7 @@ public class toggleTask
     {
         int option;
 
+        Console.Clear();
         Console.WriteLine($"The task {task.Title} is marked as" + (task.Completed ? " " : " not ") + "completed.");
 
         do
@@ -261,9 +263,17 @@ public class toggleTask
                 if (option == 0) break;
                 else if (option == 1) { task.Completed = true; break; }
                 else if (option == 2) { task.Completed = false; break; }
-                else Console.WriteLine("Please enter a valid number!");
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter a valid number!");
+                }
             }
-            else Console.WriteLine("Please enter a valid number!");
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Please enter a valid number!");
+            }
         } while (true);
 
         Console.WriteLine($"The task {task.Title} is marked as" + (task.Completed ? " " : " not ") + "completed.");
