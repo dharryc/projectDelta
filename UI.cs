@@ -1,4 +1,4 @@
-﻿//Landon
+﻿using System.Text.Json;
 var currentUser = Persistence.getUser();
 if (currentUser == null)
 {
@@ -58,6 +58,7 @@ while (true)
 
         case 4:
             Persistence.StoreUser(currentUser);
+            Console.Clear();
             return;
     }
 
@@ -153,6 +154,167 @@ while (true)
                 currentUser.DeleteTaskByIndex(deleteSelection);
             }
 
+        }
+    }
+}
+
+
+public class User
+{
+    public string Name { get; set; }
+    public List<Task> Tasks { get; set; } = [];
+
+    /// <summary>
+    /// Name defaults to User
+    /// </summary>
+    /// <param name="name"></param>
+    public User(string name = "User")
+    {
+        Name = name;
+    }
+
+    /// <summary>
+    /// Pass in title and description for task
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    public void AddTask(string title, string description)
+    {
+        Task task = new Task(title, description);
+        Tasks.Add(task);
+    }
+
+    /// <summary>
+    /// Deletes the task at specified index
+    /// </summary>
+    public void DeleteTaskByIndex(int index)
+    {
+        if (index >= Tasks.Count)
+        {
+            throw new ArgumentOutOfRangeException("This index is not valid in the User.Tasks list");
+        }
+
+        Tasks.RemoveAt(index);
+    }
+}
+
+public class Task
+{
+    public Guid Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public bool Completed { get; set; }
+
+    public Task(string title, string description)
+    {
+        Title = title;
+        Description = description;
+
+        Completed = false;
+        Id = Guid.NewGuid();
+    }
+}
+public class toggleTask
+{
+
+    public static void select_task_and_toggle(User user)
+    {
+        int option;
+
+        do
+        {
+            Console.WriteLine("Which task would you like to toggle?");
+            Console.WriteLine("  0. Cancel");
+
+            int i = 1;
+            foreach (Task task in user.Tasks)
+            {
+                Console.WriteLine($"  {i}. {task.Title}");
+                i++;
+            }
+
+            if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out option))
+            {
+                if (option == 0) break;
+                else if (option < i) { toggle_task(user.Tasks[option - 1]); break; }
+                else Console.WriteLine("Please enter a valid number!");
+            }
+            else Console.WriteLine("Please enter a valid number!");
+        } while (true);
+    }
+
+    public static void toggle_task(Task task)
+    {
+        int option;
+
+        Console.WriteLine($"The task {task.Title} is marked as" + (task.Completed ? " " : " not ") + "completed.");
+
+        do
+        {
+            Console.WriteLine("What would you like to mark it as?");
+            Console.WriteLine("  0. Cancel");
+            Console.WriteLine("  1. Complete");
+            Console.WriteLine("  2. Not Complete");
+
+            if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out option))
+            {
+                if (option == 0) break;
+                else if (option == 1) { task.Completed = true; break; }
+                else if (option == 2) { task.Completed = false; break; }
+                else Console.WriteLine("Please enter a valid number!");
+            }
+            else Console.WriteLine("Please enter a valid number!");
+        } while (true);
+
+        Console.WriteLine($"The task {task.Title} is marked as" + (task.Completed ? " " : " not ") + "completed.");
+    }
+}
+
+public class PrintTask
+{
+    public static void PrintAllTasks(User user)
+    {
+        if (user.Tasks.Count == 0) Console.WriteLine("Looks like you don't have any tasks!");
+        else
+        {
+            int i = 0;
+            foreach (var task in user.Tasks)
+            {
+                Console.WriteLine("----------------------------");
+                Console.WriteLine(task.Title);
+                Console.WriteLine("Task index: " + i);
+                if (task.Completed) Console.WriteLine("[Completed]");
+                else Console.WriteLine("[Incomplete]");
+                Console.WriteLine("****************************");
+                Console.WriteLine(task.Description);
+                Console.WriteLine("****************************");
+                i++;
+            }
+        }
+    }
+}
+
+
+public class Persistence
+{
+
+    public static void StoreUser(User user)
+    {
+        string storage = "./users.json";
+        File.WriteAllText(storage, JsonSerializer.Serialize(user));
+    }
+
+    public static User getUser()
+    {
+        if (!File.Exists("./users.json"))
+        {
+            return new User();
+        }
+        else
+        {
+            var userJson = File.ReadAllText("./users.json");
+            User? user = JsonSerializer.Deserialize<User>(userJson);
+            return user;
         }
     }
 }
